@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { map, debounceTime } from 'rxjs/operators';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
@@ -19,7 +20,11 @@ export class HomePageComponent implements OnInit, OnDestroy {
   private searchSubject = new Subject<string>();
   private searchSubscription!: Subscription;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.searchSubscription = this.searchSubject
@@ -27,6 +32,11 @@ export class HomePageComponent implements OnInit, OnDestroy {
       .subscribe((query) => {
         this.onSearch(query);
       });
+
+    this.route.queryParamMap.subscribe((params: ParamMap) => {
+      this.searchQuery = params.get('query') || '';
+      this.searchSubject.next(this.searchQuery);
+    });
 
     this.fetchJsonData().subscribe(() => {
       this.filteredData = this.data;
@@ -59,6 +69,8 @@ export class HomePageComponent implements OnInit, OnDestroy {
   }
 
   onSearch(query: string) {
+    console.log(query);
+    
     this.searchQuery = query;
     this.currentPage = 1;
 
@@ -70,6 +82,13 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
     this.totalPages = Math.ceil(this.filteredData.length / this.itemsPerPage);
     this.showData = this.getPaginatedData();
+
+    // Update search query in the URL
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { query: this.searchQuery },
+      queryParamsHandling: 'merge',
+    });
   }
 
   updateSearchQuery(query: string) {

@@ -1,5 +1,6 @@
 <div class="homePageContainer">
   <app-toolbar
+  [searchQuery]="searchQuery"
     (search)="updateSearchQuery($event)"
     (sort)="onSort($event)"
   ></app-toolbar>

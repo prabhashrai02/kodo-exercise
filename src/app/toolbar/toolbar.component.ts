@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-toolbar',
@@ -6,7 +6,8 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./toolbar.component.css']
 })
 export class ToolbarComponent {
-  searchQuery: string = '';
+  @Input() searchQuery: string = '';
+
   selectedSortOption: string = 'name';
   dropdownOptions = ['name', 'Last Edited'];
 

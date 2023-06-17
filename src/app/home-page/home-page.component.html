@@ -1,5 +1,15 @@
 <div class="feedContainer">
-  <div *ngFor="let item of data">
+  <div *ngFor="let item of showData">
     <app-feed-card [cardData]="item"></app-feed-card>
   </div>
+</div>
+
+<div class="pagination">
+  <button
+    *ngFor="let pageNumber of getPageNumbers()"
+    (click)="setPage(pageNumber)"
+    [ngClass]="{ active: pageNumber === currentPage }"
+  >
+    {{ pageNumber }}
+  </button>
 </div>

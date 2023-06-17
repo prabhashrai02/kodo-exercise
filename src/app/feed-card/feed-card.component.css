@@ -15,5 +15,7 @@
 
 .feedImage {
   width: 100%;
+  min-width: 270px;
+  min-height: 210px;
   object-fit: contain;
 }

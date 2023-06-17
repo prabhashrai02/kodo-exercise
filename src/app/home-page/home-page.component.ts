@@ -48,10 +48,6 @@ export class HomePageComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
-    this.searchSubscription.unsubscribe();
-  }
-
   fetchJsonData(): Observable<void> {
     return this.http.get('assets/mock_data.json').pipe(
       map((response) => {
@@ -141,11 +137,11 @@ export class HomePageComponent implements OnInit, OnDestroy {
     });
 
     if (option.toLowerCase() === 'name') {
-      this.showData = this.showData.sort((a: any, b: any) =>
+      this.filteredData = this.filteredData.sort((a: any, b: any) =>
         a.name.localeCompare(b.name)
       );
     } else if (option.toLowerCase() === 'last edited') {
-      this.showData = this.showData.sort((a: any, b: any) => {
+      this.filteredData = this.filteredData.sort((a: any, b: any) => {
         const dateA = new Date(a.dateLastEdited);
         const dateB = new Date(b.dateLastEdited);
         return dateA.getTime() - dateB.getTime();
@@ -154,5 +150,10 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
     this.currentPage = 1;
     this.totalPages = Math.ceil(this.filteredData.length / this.itemsPerPage);
+    this.showData = this.getPaginatedData();
+  }
+  
+  ngOnDestroy() {
+    this.searchSubscription.unsubscribe();
   }
 }

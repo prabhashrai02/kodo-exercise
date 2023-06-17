@@ -1,0 +1,19 @@
+<table>
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Last Edited</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of data">
+        <td><img [src]="item.image" class="feedImage"></td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.description }}</td>
+        <td>{{ item.dateLastEdited }}</td>
+      </tr>
+    </tbody>
+  </table>
+  

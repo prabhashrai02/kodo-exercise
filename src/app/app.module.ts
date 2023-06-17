@@ -8,6 +8,7 @@ import { FeedCardComponent } from './feed-card/feed-card.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { TabularDisplayComponent } from './tabular-display/tabular-display.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { TabularDisplayComponent } from './tabular-display/tabular-display.compo
     HomePageComponent,
     ToolbarComponent,
     TabularDisplayComponent,
+    PaginationComponent,
   ],
   imports: [
     BrowserModule,

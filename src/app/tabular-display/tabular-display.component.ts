@@ -7,6 +7,11 @@ import { Component, Input } from '@angular/core';
 })
 export class TabularDisplayComponent {
   @Input() data: CardData[] | null = null;
+
+  formatDateLastEdited(dateLastEdited: string): string {
+    const date = new Date(dateLastEdited);
+    return date.toLocaleString();
+  }
 }
 
 type CardData = {

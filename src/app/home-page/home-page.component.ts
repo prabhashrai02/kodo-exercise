@@ -1,8 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+
 import { Observable, Subject, Subscription } from 'rxjs';
 import { map, debounceTime } from 'rxjs/operators';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
@@ -17,6 +18,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   itemsPerPage: number = 10;
   totalPages: number = 1;
   searchQuery: string = '';
+  sortOption: string = '';
   private searchSubject = new Subject<string>();
   private searchSubscription!: Subscription;
 
@@ -35,6 +37,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
     this.route.queryParamMap.subscribe((params: ParamMap) => {
       this.searchQuery = params.get('query') || '';
+      this.sortOption = params.get('sort') || '';
       this.searchSubject.next(this.searchQuery);
     });
 
@@ -69,8 +72,6 @@ export class HomePageComponent implements OnInit, OnDestroy {
   }
 
   onSearch(query: string) {
-    console.log(query);
-    
     this.searchQuery = query;
     this.currentPage = 1;
 
@@ -83,7 +84,6 @@ export class HomePageComponent implements OnInit, OnDestroy {
     this.totalPages = Math.ceil(this.filteredData.length / this.itemsPerPage);
     this.showData = this.getPaginatedData();
 
-    // Update search query in the URL
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: { query: this.searchQuery },
@@ -132,19 +132,27 @@ export class HomePageComponent implements OnInit, OnDestroy {
   }
 
   onSort(option: string) {
-    if (option === 'name') {
-      this.filteredData = this.filteredData.sort((a: any, b: any) =>
+    this.sortOption = option;
+
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { query: this.searchQuery, sort: this.sortOption },
+      queryParamsHandling: 'merge',
+    });
+
+    if (option.toLowerCase() === 'name') {
+      this.showData = this.showData.sort((a: any, b: any) =>
         a.name.localeCompare(b.name)
       );
-    } else if (option === 'dateLastEdited') {
-      this.filteredData = this.filteredData.sort((a: any, b: any) => {
+    } else if (option.toLowerCase() === 'last edited') {
+      this.showData = this.showData.sort((a: any, b: any) => {
         const dateA = new Date(a.dateLastEdited);
         const dateB = new Date(b.dateLastEdited);
         return dateA.getTime() - dateB.getTime();
       });
     }
+
     this.currentPage = 1;
     this.totalPages = Math.ceil(this.filteredData.length / this.itemsPerPage);
-    this.showData = this.getPaginatedData();
   }
 }

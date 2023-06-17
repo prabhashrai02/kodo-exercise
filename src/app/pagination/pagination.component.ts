@@ -3,7 +3,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',
-  styleUrls: ['./pagination.component.css']
+  styleUrls: ['./pagination.component.css'],
 })
 export class PaginationComponent {
   @Input() currentPage: number = 1;
@@ -17,7 +17,7 @@ export class PaginationComponent {
   setPage(pageNumber: number): void {
     this.pageChanged.emit(pageNumber);
   }
-  
+
   shouldShowPage(pageNumber: number): boolean {
     return (
       Math.abs(pageNumber - this.currentPage) <= 1 ||

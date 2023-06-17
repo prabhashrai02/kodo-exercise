@@ -5,5 +5,9 @@
     placeholder="Search..."
     (input)="onSearch()"
   />
-  <app-dropdown [options]="dropdownOptions" (optionSelected)="onOptionSelected($event)"></app-dropdown>
+  <app-dropdown
+    [options]="dropdownOptions"
+    [selectedOption]="sortOption"
+    (optionSelected)="onOptionSelected($event)"
+  ></app-dropdown>
 </div>

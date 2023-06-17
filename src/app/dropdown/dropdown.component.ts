@@ -1,17 +1,22 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 
 @Component({
   selector: 'app-dropdown',
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.css'],
 })
-
 export class DropdownComponent {
   @Input() options: string[] = [];
+  @Input() selectedOption: string = '';
+
   @Output() optionSelected = new EventEmitter<string>();
 
   dropdownOpen = false;
-  selectedOption = '';
 
   toggleDropdown() {
     this.dropdownOpen = !this.dropdownOpen;

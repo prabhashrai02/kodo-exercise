@@ -11,6 +11,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { TabularDisplayComponent } from './tabular-display/tabular-display.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { DropdownComponent } from './dropdown/dropdown.component';
     TabularDisplayComponent,
     PaginationComponent,
     DropdownComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,

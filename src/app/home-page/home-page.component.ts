@@ -14,6 +14,7 @@ export class HomePageComponent implements OnInit {
   currentPage: number = 1;
   itemsPerPage: number = 10;
   totalPages: number = 1;
+  searchQuery: string = '';
 
   constructor(private http: HttpClient) {}
 
@@ -44,7 +45,14 @@ export class HomePageComponent implements OnInit {
   }
 
   onSearch(query: string) {
-    console.log(query);
+    this.searchQuery = query;
+    this.currentPage = 1;
+    this.showData = this.getPaginatedData();
+    if (this.searchQuery.trim() !== '') {
+      this.showData = this.showData.filter((item: any) =>
+        item.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    }
   }
 
   onSort(option: string) {

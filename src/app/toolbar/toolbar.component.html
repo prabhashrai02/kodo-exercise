@@ -1,0 +1,9 @@
+<div class="toolbar">
+  <input
+    type="text"
+    [(ngModel)]="searchQuery"
+    placeholder="Search..."
+    (input)="onSearch()"
+  />
+  <app-dropdown [options]="dropdownOptions" (optionSelected)="onOptionSelected($event)"></app-dropdown>
+</div>

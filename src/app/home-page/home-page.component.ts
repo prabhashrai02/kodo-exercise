@@ -42,4 +42,20 @@ export class HomePageComponent implements OnInit {
     const endIndex = startIndex + this.itemsPerPage;
     return this.data?.slice(startIndex, endIndex);
   }
+
+  onSearch(query: string) {
+    console.log(query);
+  }
+
+  onSort(option: string) {
+    if (option === 'name') {
+      this.showData = this.showData.sort((a: any, b: any) => a.name.localeCompare(b.name));
+    } else if (option === 'dateLastEdited') {
+      this.showData = this.showData.sort((a: any, b: any) => {
+        const dateA = new Date(a.dateLastEdited);
+        const dateB = new Date(b.dateLastEdited);
+        return dateA.getTime() - dateB.getTime();
+      });
+    }
+  }
 }

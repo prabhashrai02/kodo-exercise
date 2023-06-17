@@ -28,3 +28,19 @@ tr:nth-child(even) {
   height: 50px;
   object-fit: cover;
 }
+
+.imageCol {
+  width: 25%;
+}
+
+.nameCol {
+  width: 20%;
+}
+
+.descCol {
+  width: 35%;
+}
+
+.dateCol {
+  width: 20%;
+}

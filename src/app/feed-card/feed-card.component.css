@@ -1,0 +1,14 @@
+.feedCard {
+  width: 90%;
+  margin: auto;
+  padding: auto;
+  text-align: center;
+  overflow: hidden;
+  background-color: aquamarine;
+}
+
+.feedImage {
+  width: 100%;
+  object-fit: cover;
+  margin: auto;
+}

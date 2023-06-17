@@ -1,14 +1,19 @@
 .feedCard {
   width: 90%;
-  margin: auto;
-  padding: auto;
-  text-align: center;
+  height: 100%;
   overflow: hidden;
-  background-color: aquamarine;
+  margin: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+  background-color: var(--cardBackground);
+  border-radius: 16px;
 }
 
 .feedImage {
   width: 100%;
-  object-fit: cover;
-  margin: auto;
+  object-fit: contain;
 }

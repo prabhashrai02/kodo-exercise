@@ -1,5 +1,5 @@
 <div *ngIf="cardData" class="feedCard">
-    <h1>{{ cardData.name }}</h1>
-    <p>{{ cardData.description }}</p>
     <img [src]="cardData.image" class="feedImage">
+    <h2>{{ cardData.name }}</h2>
+    <p>{{ cardData.description }}</p>
 </div>

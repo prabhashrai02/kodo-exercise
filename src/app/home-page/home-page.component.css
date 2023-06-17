@@ -1,9 +1,10 @@
 .homePageContainer {
-    width: 95%;
-    margin: 48px auto;
+  width: 95%;
+  margin: 48px auto;
 }
 
 .feedContainer {
+  margin: 16px 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   row-gap: 48px;
@@ -11,29 +12,29 @@
 }
 
 .pagination {
-    display: flex;
-    justify-content: center;
-    margin: 24px 0;
-  }
-  
-  .pagination button {
-    padding: 8px 12px;
-    margin-right: 8px;
-    border: none;
-    background-color: #e0e0e0;
-    color: #333;
-    cursor: pointer;
-    font-size: 14px;
-  }
-  
-  .pagination button.active {
-    background-color: #333;
-    color: #fff;
-  }
-  
-  .pagination button:hover {
-    background-color: #ccc;
-  }
+  display: flex;
+  justify-content: center;
+  margin: 24px 0;
+}
+
+.pagination button {
+  padding: 8px 12px;
+  margin-right: 8px;
+  border: none;
+  background-color: #e0e0e0;
+  color: #333;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.pagination button.active {
+  background-color: #333;
+  color: #fff;
+}
+
+.pagination button:hover {
+  background-color: #ccc;
+}
 
 @media screen and (max-width: 1023px) {
   .feedContainer {

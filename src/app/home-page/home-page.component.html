@@ -1,15 +1,20 @@
 <div class="homePageContainer">
-    <div class="feedContainer">
-      <div *ngFor="let item of showData">
-        <app-feed-card [cardData]="item"></app-feed-card>
-      </div>
+  <app-toolbar
+    (search)="onSearch($event)"
+    (sort)="onSort($event)"
+  ></app-toolbar>
+
+  <div class="feedContainer">
+    <div *ngFor="let item of showData">
+      <app-feed-card [cardData]="item"></app-feed-card>
     </div>
-    
-    <app-tabular-display [data]="showData"></app-tabular-display>
-    
-    <app-pagination
-      [currentPage]="currentPage"
-      [totalPages]="totalPages"
-      (pageChanged)="setPage($event)"
-    ></app-pagination>
+  </div>
+
+  <app-tabular-display [data]="showData"></app-tabular-display>
+
+  <app-pagination
+    [currentPage]="currentPage"
+    [totalPages]="totalPages"
+    (pageChanged)="setPage($event)"
+  ></app-pagination>
 </div>

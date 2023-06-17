@@ -28,7 +28,6 @@ export class HomePageComponent implements OnInit {
       map((response) => {
         this.data = response;
         this.totalPages = Math.ceil(this.data.length / this.itemsPerPage);
-        console.log(this.data);
       })
     );
   }
@@ -43,8 +42,4 @@ export class HomePageComponent implements OnInit {
     const endIndex = startIndex + this.itemsPerPage;
     return this.data?.slice(startIndex, endIndex);
   }
-
-  getPageNumbers(): number[] {
-    return Array.from({ length: this.totalPages }, (_, index) => index + 1);
-  }  
 }

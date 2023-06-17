@@ -1,0 +1,11 @@
+<div class="dropdown" [class.open]="dropdownOpen">
+  <div class="dropdownHeader" (click)="toggleDropdown()">
+    {{ selectedOption || 'Sort' }}
+    <span class="dropdownArrow">&#9662;</span>
+  </div>
+  <ul class="dropdownList" *ngIf="dropdownOpen">
+    <li *ngFor="let option of options" (click)="selectOption(option)">
+      {{ option }}
+    </li>
+  </ul>
+</div>

@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, Subject, Subscription } from 'rxjs';
+import { map, debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css'],
 })
-export class HomePageComponent implements OnInit {
+export class HomePageComponent implements OnInit, OnDestroy {
   showData: any;
   data: any;
   filteredData: any;
@@ -16,15 +16,27 @@ export class HomePageComponent implements OnInit {
   itemsPerPage: number = 10;
   totalPages: number = 1;
   searchQuery: string = '';
+  private searchSubject = new Subject<string>();
+  private searchSubscription!: Subscription;
 
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
+    this.searchSubscription = this.searchSubject
+      .pipe(debounceTime(300))
+      .subscribe((query) => {
+        this.onSearch(query);
+      });
+
     this.fetchJsonData().subscribe(() => {
       this.filteredData = this.data;
       this.totalPages = Math.ceil(this.filteredData.length / this.itemsPerPage);
       this.showData = this.getPaginatedData();
     });
+  }
+
+  ngOnDestroy() {
+    this.searchSubscription.unsubscribe();
   }
 
   fetchJsonData(): Observable<void> {
@@ -49,19 +61,22 @@ export class HomePageComponent implements OnInit {
   onSearch(query: string) {
     this.searchQuery = query;
     this.currentPage = 1;
-  
+
     if (query.startsWith('"') && query.endsWith('"')) {
       this.filteredData = this.getExactFilteredData();
     } else {
       this.filteredData = this.getFilteredData();
     }
-  
+
     this.totalPages = Math.ceil(this.filteredData.length / this.itemsPerPage);
     this.showData = this.getPaginatedData();
   }
 
+  updateSearchQuery(query: string) {
+    this.searchSubject.next(query);
+  }
+
   getExactFilteredData(): any[] {
-    
     if (this.searchQuery.trim() === '') {
       return this.data;
     }
@@ -74,17 +89,19 @@ export class HomePageComponent implements OnInit {
   }
 
   getFilteredData(): any[] {
-    
     if (this.searchQuery.trim() === '') {
       return this.data;
     }
     const query = this.searchQuery.toLowerCase().trim();
-    return this.data.filter((item: any) =>
-      item.name.toLowerCase().includes(query) || item.description.toLowerCase().includes(query) ||
-      this.checkPartialMatch(item.name.toLowerCase(), query) || this.checkPartialMatch(item.description.toLowerCase(), query)
+    return this.data.filter(
+      (item: any) =>
+        item.name.toLowerCase().includes(query) ||
+        item.description.toLowerCase().includes(query) ||
+        this.checkPartialMatch(item.name.toLowerCase(), query) ||
+        this.checkPartialMatch(item.description.toLowerCase(), query)
     );
   }
-  
+
   checkPartialMatch(text: string, query: string): boolean {
     const words = query.split(' ');
     for (const word of words) {
@@ -94,7 +111,6 @@ export class HomePageComponent implements OnInit {
     }
     return true;
   }
-  
 
   onSort(option: string) {
     if (option === 'name') {

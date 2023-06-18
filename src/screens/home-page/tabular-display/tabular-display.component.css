@@ -1,5 +1,10 @@
-table {
+.tableContainer {
   margin-top: 48px;
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.table {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
@@ -9,8 +14,6 @@ th,
 td {
   padding: 8px;
   text-align: left;
-  white-space: wrap;
-  overflow: hidden;
 }
 
 thead {
@@ -27,18 +30,43 @@ tr:nth-child(even) {
   object-fit: cover;
 }
 
-.imageCol {
-  width: 25%;
+.card {
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  overflow: hidden;
 }
 
-.nameCol {
-  width: 20%;
+.card-header {
+  background-color: #f2f2f2;
+  padding: 8px;
+  font-weight: bold;
 }
 
-.descCol {
-  width: 35%;
+.card-content {
+  padding: 8px;
+  white-space: nowrap;
 }
 
-.dateCol {
-  width: 20%;
+@media screen and (max-width: 600px) {
+  .table-container {
+    overflow-x: auto;
+  }
+
+  .table {
+    display: none;
+  }
+
+  .card {
+    display: block;
+  }
+
+  .card-content {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .card-content > * {
+    width: 50%;
+  }
 }

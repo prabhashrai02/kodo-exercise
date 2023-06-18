@@ -1,4 +1,5 @@
-<table *ngIf="showData">
+<div *ngIf="showData" class="tableContainer">
+  <table>
     <thead>
       <tr>
         <th class="imageCol">Image</th>
@@ -9,11 +10,11 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of data">
-        <td><img [src]="item.image" class="feedImage"></td>
+        <td><img [src]="item.image" class="feedImage" /></td>
         <td>{{ item.name }}</td>
         <td>{{ item.description }}</td>
         <td>{{ formatDateLastEdited(item.dateLastEdited) }}</td>
       </tr>
     </tbody>
   </table>
-  
+</div>

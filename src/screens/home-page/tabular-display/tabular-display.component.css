@@ -17,11 +17,11 @@ td {
 }
 
 thead {
-  background-color: #f2f2f2;
+  background-color: var(--cardBackground);
 }
 
 tr:nth-child(even) {
-  background-color: #f9f9f9;
+  background-color: var(--hoverBackground);
 }
 
 .feedImage {
@@ -31,7 +31,7 @@ tr:nth-child(even) {
 }
 
 .card {
-  border: 1px solid #ccc;
+  border: 1px solid var(--paginationButtonHover);
   margin-bottom: 10px;
   border-radius: 4px;
   overflow: hidden;

@@ -1,9 +1,4 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-} from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-dropdown',
@@ -26,5 +21,13 @@ export class DropdownComponent {
     this.selectedOption = option;
     this.optionSelected.emit(option);
     this.dropdownOpen = false;
+  }
+
+  @HostListener('document:click', ['$event.target'])
+  onClickOutside(target: any) {
+    const dropdownElement = document.getElementById('dropdown');
+    if (dropdownElement && !dropdownElement.contains(target)) {
+      this.dropdownOpen = false;
+    }
   }
 }

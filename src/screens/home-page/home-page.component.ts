@@ -129,29 +129,29 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
   onSort(option: string) {
     this.sortOption = option;
-
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: { query: this.searchQuery, sort: this.sortOption },
-      queryParamsHandling: 'merge',
-    });
-
+  
+    const sortedData = [...this.filteredData];
+  
     if (option.toLowerCase() === 'name') {
-      this.filteredData = this.filteredData.sort((a: any, b: any) =>
+      sortedData.sort((a: any, b: any) =>
         a.name.localeCompare(b.name)
       );
     } else if (option.toLowerCase() === 'last edited') {
-      this.filteredData = this.filteredData.sort((a: any, b: any) => {
+      sortedData.sort((a: any, b: any) => {
         const dateA = new Date(a.dateLastEdited);
         const dateB = new Date(b.dateLastEdited);
         return dateA.getTime() - dateB.getTime();
       });
     }
 
+    this.filteredData = sortedData;
+
     this.currentPage = 1;
     this.totalPages = Math.ceil(this.filteredData.length / this.itemsPerPage);
     this.showData = this.getPaginatedData();
   }
+  
+  
   
   ngOnDestroy() {
     this.searchSubscription.unsubscribe();

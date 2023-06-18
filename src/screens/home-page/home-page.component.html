@@ -14,6 +14,8 @@
 
   <app-tabular-display [data]="showData"></app-tabular-display>
 
+  <app-empty-list *ngIf="totalPages === 0"></app-empty-list>
+
   <app-pagination
     [currentPage]="currentPage"
     [totalPages]="totalPages"

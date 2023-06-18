@@ -12,6 +12,7 @@ import { TabularDisplayComponent } from '../screens/home-page/tabular-display/ta
 import { PaginationComponent } from '../common/pagination/pagination.component';
 import { DropdownComponent } from '../common/dropdown/dropdown.component';
 import { NavbarComponent } from '../common/navbar/navbar.component';
+import { EmptyListComponent } from '../common/empty-list/empty-list.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { NavbarComponent } from '../common/navbar/navbar.component';
     PaginationComponent,
     DropdownComponent,
     NavbarComponent,
+    EmptyListComponent,
   ],
   imports: [
     BrowserModule,

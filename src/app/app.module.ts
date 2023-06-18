@@ -5,13 +5,13 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FeedCardComponent } from './feed-card/feed-card.component';
-import { HomePageComponent } from './home-page/home-page.component';
-import { ToolbarComponent } from './toolbar/toolbar.component';
-import { TabularDisplayComponent } from './tabular-display/tabular-display.component';
-import { PaginationComponent } from './pagination/pagination.component';
-import { DropdownComponent } from './dropdown/dropdown.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { FeedCardComponent } from '../common/feed-card/feed-card.component';
+import { HomePageComponent } from '../screens/home-page/home-page.component';
+import { ToolbarComponent } from '../screens/home-page/toolbar/toolbar.component';
+import { TabularDisplayComponent } from '../screens/home-page/tabular-display/tabular-display.component';
+import { PaginationComponent } from '../common/pagination/pagination.component';
+import { DropdownComponent } from '../common/dropdown/dropdown.component';
+import { NavbarComponent } from '../common/navbar/navbar.component';
 
 @NgModule({
   declarations: [

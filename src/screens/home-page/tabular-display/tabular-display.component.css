@@ -9,9 +9,8 @@ th,
 td {
   padding: 8px;
   text-align: left;
-  white-space: nowrap;
+  white-space: wrap;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 thead {

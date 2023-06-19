@@ -95,7 +95,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
     if (this.searchQuery.trim() === '') {
       return this.data;
     }
-    const query = this.searchQuery.toLowerCase().trim();
+    const query = this.searchQuery.toLowerCase().trim().slice(1, -1);
     return this.data.filter(
       (item: any) =>
         item.name.toLowerCase().includes(query) ||

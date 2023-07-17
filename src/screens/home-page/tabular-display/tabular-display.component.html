@@ -4,17 +4,20 @@
       <tr>
         <th class="imageCol">Image</th>
         <th class="nameCol">Name</th>
-        <th class="descCol">Description</th>
         <th class="dateCol">Last Edited</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of data">
-        <td><img [src]="item.image" class="feedImage" /></td>
-        <td>{{ item.name }}</td>
-        <td>{{ item.description }}</td>
-        <td>{{ formatDateLastEdited(item.dateLastEdited) }}</td>
-      </tr>
+      <ng-container *ngFor="let item of data">
+        <tr>
+          <td><img [src]="item.image" class="feedImage" /></td>
+          <td>{{ item.name }}</td>
+          <td>{{ formatDateLastEdited(item.dateLastEdited) }}</td>
+        </tr>
+        <tr>
+          <td colspan="3"><b>Description:</b> {{ item.description }}</td>
+        </tr>
+      </ng-container>
     </tbody>
   </table>
 </div>
